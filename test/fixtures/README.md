@@ -5,41 +5,51 @@ This directory contains static test data files used across the test suite.
 ## Files
 
 ### aiModels.json
+
 Mock AI models configuration for testing AI service integration.
 
 **Usage:**
+
 ```javascript
 import aiModels from '../fixtures/aiModels.json' assert { type: 'json' };
 ```
 
 ### languages.json
+
 Mock language configuration for testing translation services.
 
 **Usage:**
+
 ```javascript
 import languages from '../fixtures/languages.json' assert { type: 'json' };
 ```
 
 ### badWords.json
+
 Mock bad words configuration for testing moderation service.
 
 **Usage:**
+
 ```javascript
 import badWords from '../fixtures/badWords.json' assert { type: 'json' };
 ```
 
 ### quotes.json
+
 Mock quotes data for testing quote mode functionality.
 
 **Usage:**
+
 ```javascript
 import quotes from '../fixtures/quotes.json' assert { type: 'json' };
 ```
 
 ### warnings.json
+
 Mock user warnings data for testing warning repository.
 
 **Usage:**
+
 ```javascript
 import warnings from '../fixtures/warnings.json' assert { type: 'json' };
 ```
@@ -63,6 +73,7 @@ When adding new fixture files:
 5. Update related test files
 
 Example:
+
 ```javascript
 // In your test file
 import myFixture from '../fixtures/myFixture.json' assert { type: 'json' };

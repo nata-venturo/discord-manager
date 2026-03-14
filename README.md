@@ -34,7 +34,6 @@ A discord token is required to connect your account with [discord.js-selfbot-v13
 
 - **Log in to Discord**: Make sure you're already logged in to your Discord account on your web browser
 - **Open Developer Tools**:
-
     - On your browser, press **Ctrl + Shift + I** (Windows/Linux) or **Cmd + Option + I** (Mac) to open Developer Tools
     - Navigate to the Console tab
 
@@ -49,7 +48,6 @@ A discord token is required to connect your account with [discord.js-selfbot-v13
     ```
 
 - **Get Your Token**: After running the code, your token will appear in the console. Copy and save safely for later use in your bot configuration. Important:
-
     - Never share your token with anyone
     - Treat it like a password to protect your account from unauthorized access
 
@@ -58,17 +56,14 @@ A discord token is required to connect your account with [discord.js-selfbot-v13
 Channel ID are required for the bot to send messages to specific channels on the Discord server. To get your Discord channel ID, follow these steps:
 
 - **Open Discord Web**: Use the web version of Discord to simplify the process
-
     - Go to [Discord Web](https://discord.com/)
     - Log in to your account if you haven’t already
 
 - **Navigate to the Desired Server and Channel**: Find the channel whose ID you want to retrieve
-
     - Open the server containing the channel
     - Click on the channel name in the server’s sidebar to open it
 
 - **Copy the Channel ID from the URL**: Extract the Channel ID directly from the URL
-
     - Look at your browser's address bar
     - The URL should look something like this
 
@@ -86,12 +81,10 @@ Gemini API keys are used to generate messages when interacting with other users.
 
 - **Visit the Google AI Studio Website**: Open your browser and go to [Google AI Studio](https://aistudio.google.com/)
 - **Log In to Your Google Account**: Access your account to proceed
-
     - Click Sign in to Google AI Studio
     - Use your Google credentials to log in
 
 - **Navigate to the API Key Section**: Find the option to generate your API key
-
     - After logging in, look for and click the Get API Key button
     - Click the Create API Key button
 
@@ -119,7 +112,6 @@ Gemini API keys are used to generate messages when interacting with other users.
     ```
 
 - **Add Your Gemini API Key**: Paste your Gemini API key into the .env file
-
     - Open the .env file in a text editor
     - Replace the placeholder with your actual Gemini API key
 
@@ -142,20 +134,16 @@ The bot reads messages sent by other users on a particular channel and utilises 
     ```
 
 - **Prompts**:
-
     - **Discord Token**: Authentication token to log in the bot
     - **Discord Channel**: ID of the channel where messages will be sent
     - **List Auto Chat**: Options for the type of auto chat:
-
         - **Talk With AI**: The bot uses AI to respond to messages
-
             - **List Model AI**: AI models available for use (refer to [listModelAI.json](assets/listModelAI.json))
             - **List Language**: Language options for responses (refer to [listLanguage.json](assets/listLanguage.json))
             - **List Type**: Method of sending responses, either to the channel or as a reply
             - **Delay Message**: Time delay before sending a message
 
         - **Quote**: The bot sends motivational quotes
-
             - **List Language**: Language options for quotes (refer to [listLanguage.json](assets/listLanguage.json))
             - **Delay Message**: Time delay before sending a quote
             - **Delay Delete**: Time delay before deleting the quote
@@ -171,7 +159,6 @@ The bot scans all messages sent by other users on a particular channel and check
     ```
 
 - **Prompts**:
-
     - **Discord Token**: Authentication token to log in the bot
     - **Discord Channel**: ID of the channel to be monitored
 
@@ -186,14 +173,11 @@ The bot will check the time and send a "Good Morning" message in the morning (08
     ```
 
 - **Prompts**:
-
     - **Discord Token**: Authentication token to log in the bot
     - **Discord Channel**: ID of the channel where the messages will be sent
     - **List Custom Message**: Options for GM/GN messages:
-
         - **Default Messages**: Use pre-defined messages
         - **Custom Messages**: Use user-defined custom messages
-
             - **Custom GM Text**: Custom "Good Morning" text
             - **Custom GN Text**: Custom "Good Night" text
 
@@ -208,18 +192,13 @@ The bot will scan messages sent by other users on a particular channel and add r
     ```
 
 - **Prompts**:
-
     - **Discord Token**: Authentication token to log in the bot
     - **Discord Channel**: ID of the channel to be monitored
     - **List Random**: Options for reaction behavior:
-
         - **All Messages Without Delay**: React to all messages immediately
         - **All Messages With Delay**: React to all messages with a delay
-
             - **List Delay**:
-
                 - **Manual Delay**: Set reaction delay manually
-
                     - **Delay Reaction**: Time delay for the reaction
 
                 - **Automatic Delay**: Delay determined automatically by the bot
@@ -237,7 +216,6 @@ The bot will trigger the "typing" animation (Typing Indicator) at certain preset
     ```
 
 - **Prompts**:
-
     - **Discord Token**: Authentication token to log in the bot
     - **Discord Channel**: ID of the channel where typing simulation occurs
 
@@ -252,7 +230,6 @@ The bot will send Mango faucet claim requests according to the preset time inter
     ```
 
 - **Prompts**:
-
     - **Discord Token**: Authentication token to log in the bot
     - **Discord Channel**: ID of the channel where claims are made
     - **Mango Address**: Mango address to receive the claimed rewards
@@ -263,13 +240,11 @@ The bot will send Mango faucet claim requests according to the preset time inter
 Make sure all configurations are set up correctly before running the scripts.
 
 - **Required**:
-
     - **Discord Token**: Your Discord bot token
     - **Discord Channel ID**: The channel ID where the bot will operate
     - **Gemini API Key**: Your Gemini API key
 
 - **JSON Configurations**:
-
     - **listBadWord.json**: Configure forbidden words for Auto Forbidden Words
     - **listLanguage.json**: Set supported languages for Auto Chat and Quote features
     - **listModelAI.json**: Define AI models for Auto Chat

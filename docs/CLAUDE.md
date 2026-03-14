@@ -11,6 +11,7 @@ Discord Manager is a Discord automation bot built with Node.js that provides var
 ## Core Commands
 
 ### Development Commands
+
 ```bash
 # Install dependencies
 npm install
@@ -25,6 +26,7 @@ npm run test              # Run Mocha tests (note: test directory doesn't exist 
 ```
 
 ### Running Features
+
 Each automation feature runs as a standalone script:
 
 ```bash
@@ -39,6 +41,7 @@ npm run discordAutoFaucetMango       # Mango Network faucet automation
 ## Architecture
 
 ### Project Structure
+
 ```
 discord-manager/
 ├── src/                          # Source files for all automation features
@@ -60,6 +63,7 @@ discord-manager/
 ```
 
 ### Key Dependencies
+
 - **discord.js-selfbot-v13**: Discord self-bot client implementation
 - **@google/generative-ai**: Google Gemini API for AI chat responses
 - **prompts**: Interactive CLI prompts for configuration
@@ -72,24 +76,33 @@ discord-manager/
 ### Code Patterns
 
 #### Interactive Prompts
+
 All scripts use the `prompts` library for interactive CLI configuration:
+
 ```javascript
-const { tokenId } = await prompts({
-    type: 'text',
-    name: 'tokenId',
-    message: 'Enter discord token',
-    validate: (value) => (value.trim() === '' ? 'Discord token is required' : true)
-}, { onCancel });
+const { tokenId } = await prompts(
+    {
+        type: 'text',
+        name: 'tokenId',
+        message: 'Enter discord token',
+        validate: (value) => (value.trim() === '' ? 'Discord token is required' : true),
+    },
+    { onCancel },
+);
 ```
 
 #### Common Utilities
+
 Each script implements similar utility functions:
+
 - `onCancel()`: Handles prompt cancellation
 - `formatTime(ms)`: Formats milliseconds to human-readable time
 - `loadFileJson(path, type)`: Loads JSON files as arrays or maps
 
 #### Message Processing
+
 The `autoChat.js` implements a queue-based message processing system:
+
 - Uses a `messageQueue` to handle multiple messages
 - `isProcessing` flag prevents concurrent processing
 - `lastMessage` tracking to avoid duplicate responses
@@ -98,14 +111,17 @@ The `autoChat.js` implements a queue-based message processing system:
 ## Environment Configuration
 
 Create a `.env` file based on `.env.example`:
+
 ```bash
 cp .env.example .env
 ```
 
 Required environment variable:
+
 - `GEMINI_API_KEY`: Google Generative AI API key for chat automation
 
 Runtime configuration is done via interactive prompts, including:
+
 - Discord token (required for all features)
 - Discord channel ID (required for all features)
 - Feature-specific settings (AI models, languages, delays, etc.)
@@ -113,18 +129,21 @@ Runtime configuration is done via interactive prompts, including:
 ## Development Guidelines
 
 ### Code Style
+
 - ES6 modules (`"type": "module"` in package.json)
 - Use ESLint with `@eslint/js` recommended config
 - Prettier for code formatting
 - Always run `npm run lint:fix` before committing
 
 ### File Organization
+
 - All automation features live in `src/`
 - Configuration JSON files in `assets/`
 - Each feature is self-contained in a single JavaScript file
 - No shared utility module currently exists
 
 ### Adding New Features
+
 1. Create new script file in `src/` directory
 2. Follow existing pattern: imports, client setup, prompts, event handlers
 3. Add npm script to `package.json` under `scripts` section
@@ -132,6 +151,7 @@ Runtime configuration is done via interactive prompts, including:
 5. Run `npm run lint:fix` before committing
 
 ### Common Discord Client Setup
+
 ```javascript
 import { Client } from 'discord.js-selfbot-v13';
 const client = new Client({ checkUpdate: false });
@@ -145,7 +165,9 @@ client.login(tokenId);
 ```
 
 ### JSON Asset Files
+
 Configuration files in `assets/` use specific structures:
+
 - `listModelAI.json`: Array of AI model configurations with prompts
 - `listLanguage.json`: Array of supported language options
 - `listBadWord.json`: Array of forbidden words for moderation
@@ -154,6 +176,7 @@ Configuration files in `assets/` use specific structures:
 ## Testing
 
 The project is configured for Mocha/Chai testing but test files don't exist yet. When writing tests:
+
 - Test files should go in a `test/` directory
 - Use Mocha's describe/it syntax
 - Use Chai for assertions

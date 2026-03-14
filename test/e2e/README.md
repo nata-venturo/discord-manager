@@ -11,15 +11,15 @@ E2E tests simulate real user interactions and test the entire application flow f
 Each E2E test file covers a complete workflow:
 
 - **chat-workflow.e2e.test.js**: Tests complete AI chat automation workflow
-  - Talk With AI mode from user input to AI response
-  - Quote mode from setup to sending/deleting quotes
-  - Error handling scenarios
+    - Talk With AI mode from user input to AI response
+    - Quote mode from setup to sending/deleting quotes
+    - Error handling scenarios
 
 - **moderation-workflow.e2e.test.js**: Tests complete moderation workflow
-  - Full moderation cycle: warning → timeout → kick
-  - Multi-user moderation tracking
-  - Allowed user handling
-  - Error recovery
+    - Full moderation cycle: warning → timeout → kick
+    - Multi-user moderation tracking
+    - Allowed user handling
+    - Error recovery
 
 ## Running E2E Tests
 
