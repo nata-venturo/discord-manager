@@ -62,6 +62,7 @@
         "mocha": "^11.0.1",
         "prettier": "^3.4.2",
         "sinon": "^19.0.2",
+        "typescript": "^5.9.3",
         "yargs": "^17.7.2"
     },
     "dependencies": {
@@ -102,6 +103,6 @@
         "string-similarity": "^4.0.4",
         "translate-google": "^1.5.0",
         "utf-8-validate": "^6.0.6",
-        "vercel": "^41.7.0"
+        "vercel": "^50.32.5"
     }
 }
