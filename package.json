@@ -68,7 +68,7 @@
     "dependencies": {
         "@discord/embedded-app-sdk": "^1.4.2",
         "@discordjs/voice": "^0.18.0",
-        "@google/generative-ai": "^0.24.1",
+        "@google/genai": "^1.45.0",
         "axios": "^1.6.8",
         "bad-words-next": "^3.1.1",
         "body-parser": "^1.20.2",

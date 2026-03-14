@@ -12,7 +12,7 @@
  * AI Configuration Constants
  */
 export const AI_CONFIG = {
-    MODEL: 'gemini-1.5-flash',
+    MODEL: 'gemini-3-flash-preview',
     TEMPERATURE: 0.7,
     TOP_P: 0.95,
     TOP_K: 64,

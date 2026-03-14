@@ -8,7 +8,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 import { AIServiceError } from '../errors/index.js';
 import { logger } from '../utils/logger.js';
 import { config } from '../config/index.js';
@@ -25,7 +25,7 @@ export class AIService {
             throw new AIServiceError('Gemini API key is required');
         }
 
-        this.genAI = new GoogleGenerativeAI(key);
+        this.genAI = new GoogleGenAI({ apiKey: key });
         this.config = config.get('ai');
     }
 
@@ -45,21 +45,13 @@ export class AIService {
             // Build prompt from model template
             const prompt = this.buildPrompt(model.description, content, language);
 
-            // Get Gemini model
-            const geminiModel = this.genAI.getGenerativeModel({
+            // Generate response using new SDK
+            const response = await this.genAI.models.generateContent({
                 model: this.config.model,
+                contents: prompt,
             });
 
-            // Generate response
-            const result = await geminiModel.generateContent(prompt, {
-                temperature: this.config.temperature,
-                top_p: this.config.topP,
-                top_k: this.config.topK,
-                max_output_tokens: this.config.maxTokens,
-            });
-
-            const response = await result.response;
-            let text = response.text();
+            let text = response.text;
 
             if (!text || text.trim() === '') {
                 return this.getNoResponseMessage(language);

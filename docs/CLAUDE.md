@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Discord Manager is a Discord automation bot built with Node.js that provides various automation features for Discord self-bots. The project uses `discord.js-selfbot-v13` for Discord integration and Google's Generative AI (Gemini) for intelligent chat responses.
+Discord Manager is a Discord automation bot built with Node.js that provides various automation features for Discord self-bots. The project uses `discord.js-selfbot-v13` for Discord integration and Google's Gen AI (Gemini) for intelligent chat responses.
 
 **IMPORTANT**: This is a Discord self-bot implementation. Be aware that Discord's Terms of Service prohibit the use of self-bots. This project is intended for educational purposes and authorized testing environments only.
 
@@ -65,7 +65,7 @@ discord-manager/
 ### Key Dependencies
 
 - **discord.js-selfbot-v13**: Discord self-bot client implementation
-- **@google/generative-ai**: Google Gemini API for AI chat responses
+- **@google/genai**: Google Gemini API for AI chat responses
 - **prompts**: Interactive CLI prompts for configuration
 - **ora**: Terminal spinner for better UX
 - **node-schedule**: Cron-like job scheduler for timed messages
@@ -118,7 +118,7 @@ cp .env.example .env
 
 Required environment variable:
 
-- `GEMINI_API_KEY`: Google Generative AI API key for chat automation
+- `GEMINI_API_KEY`: Google Gen AI API key for chat automation
 
 Runtime configuration is done via interactive prompts, including:
 
