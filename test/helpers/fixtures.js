@@ -53,7 +53,7 @@ export const mockQuotes = [
  * Mock Discord tokens (for testing only)
  */
 export const mockDiscordTokens = {
-    valid: 'MTIzNDU2Nzg5MDEyMzQ1Njc4OQ.GaBcDe.FgHiJkLmNoPqRsTuVwXyZaBcDeFgHiJkLmNoPqRs',
+    valid: 'YOUR_DISCORD_BOT_TOKEN',
     invalid: 'short',
     malformed: '!!!invalid!!!token!!!'
 };
