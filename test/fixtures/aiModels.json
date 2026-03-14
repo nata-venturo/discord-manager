@@ -1,0 +1,12 @@
+[
+    {
+        "id": "gemini-1.5-flash",
+        "name": "Gemini 1.5 Flash",
+        "description": "You are a helpful and friendly AI assistant. Always respond in a conversational and engaging manner."
+    },
+    {
+        "id": "gemini-1.5-pro",
+        "name": "Gemini 1.5 Pro",
+        "description": "You are an advanced AI assistant with deep knowledge. Provide detailed and accurate responses."
+    }
+]

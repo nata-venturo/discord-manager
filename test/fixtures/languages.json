@@ -1,0 +1,42 @@
+[
+    {
+        "id": "auto",
+        "name": "Auto",
+        "codes": ["auto"]
+    },
+    {
+        "id": "en",
+        "name": "English",
+        "codes": ["en", "eng"]
+    },
+    {
+        "id": "id",
+        "name": "Indonesian",
+        "codes": ["id", "ind", "indonesian"]
+    },
+    {
+        "id": "es",
+        "name": "Spanish",
+        "codes": ["es", "spa", "spanish"]
+    },
+    {
+        "id": "fr",
+        "name": "French",
+        "codes": ["fr", "fra", "french"]
+    },
+    {
+        "id": "de",
+        "name": "German",
+        "codes": ["de", "deu", "german"]
+    },
+    {
+        "id": "ja",
+        "name": "Japanese",
+        "codes": ["ja", "jpn", "japanese"]
+    },
+    {
+        "id": "zh",
+        "name": "Chinese",
+        "codes": ["zh", "chi", "chinese"]
+    }
+]

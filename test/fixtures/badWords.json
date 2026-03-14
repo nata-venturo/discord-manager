@@ -1,0 +1,10 @@
+{
+    "languages": ["en", "id"],
+    "words": [
+        "badword1",
+        "badword2",
+        "offensive",
+        "inappropriate",
+        "testbadword"
+    ]
+}
