@@ -19,7 +19,7 @@ export function createMockDiscordClient() {
         tag: 'TestBot#1234',
         username: 'TestBot',
         discriminator: '1234',
-        bot: false
+        bot: false,
     };
 
     // Mock channels
@@ -32,7 +32,7 @@ export function createMockDiscordClient() {
                 return mockChannels.get(channelId);
             }
             throw new Error('Unknown Channel');
-        }
+        },
     };
 
     // Mock login
@@ -79,13 +79,13 @@ export function createMockChannel(options = {}) {
             return createMockMessage({
                 content,
                 channelId: options.id || '987654321',
-                author: { id: '123456789', tag: 'TestBot#1234', bot: false }
+                author: { id: '123456789', tag: 'TestBot#1234', bot: false },
             });
         },
         sendTyping: async () => {
             return Promise.resolve();
         },
-        ...options
+        ...options,
     };
 }
 
@@ -101,7 +101,7 @@ export function createMockMessage(options = {}) {
             tag: 'TestUser#5678',
             username: 'TestUser',
             discriminator: '5678',
-            bot: false
+            bot: false,
         },
         channel: options.channel || createMockChannel(),
         channelId: options.channelId || '987654321',
@@ -111,22 +111,22 @@ export function createMockMessage(options = {}) {
         mentions: options.mentions || {
             users: new Map(),
             has: (user) => {
-                return Array.from(message.mentions.users.values()).some(u => u.id === user.id);
-            }
+                return Array.from(message.mentions.users.values()).some((u) => u.id === user.id);
+            },
         },
         reply: async (content) => {
             return createMockMessage({
                 content,
-                author: { id: '123456789', tag: 'TestBot#1234', bot: false }
+                author: { id: '123456789', tag: 'TestBot#1234', bot: false },
             });
         },
         delete: async () => {
             return Promise.resolve();
         },
-        react: async (emoji) => {
+        react: async () => {
             return Promise.resolve();
         },
-        ...options
+        ...options,
     };
 
     return message;
@@ -145,7 +145,7 @@ export function createMockGuild(options = {}) {
             name: 'custom_emoji',
             requiresColons: true,
             animated: false,
-            toString: () => '<:custom_emoji:emoji1>'
+            toString: () => '<:custom_emoji:emoji1>',
         });
     }
 
@@ -153,14 +153,14 @@ export function createMockGuild(options = {}) {
         id: options.id || '111222333',
         name: options.name || 'Test Guild',
         emojis: {
-            cache: emojis
+            cache: emojis,
         },
         members: {
             fetch: async (userId) => {
                 return createMockMember({ id: userId });
-            }
+            },
         },
-        ...options
+        ...options,
     };
 }
 
@@ -175,14 +175,14 @@ export function createMockMember(options = {}) {
             tag: 'TestUser#5678',
             username: 'TestUser',
             discriminator: '5678',
-            bot: false
+            bot: false,
         },
-        timeout: async (duration, reason) => {
+        timeout: async () => {
             return Promise.resolve();
         },
-        kick: async (reason) => {
+        kick: async () => {
             return Promise.resolve();
         },
-        ...options
+        ...options,
     };
 }

@@ -170,7 +170,11 @@ export class ChatCommand {
      */
     async handleIncomingMessage(message, channelId) {
         // Ignore bots, wrong channel, and own messages
-        if (message.author.bot || message.channel.id !== channelId || message.author.tag === this.discordService.getCurrentUser().tag) {
+        if (
+            message.author.bot ||
+            message.channel.id !== channelId ||
+            message.author.tag === this.discordService.getCurrentUser().tag
+        ) {
             return;
         }
 
@@ -198,7 +202,11 @@ export class ChatCommand {
         } else {
             // Regular queue
             if (this.messageQueue.getQueueLength() === 0 && !this.messageQueue.isCurrentlyProcessing()) {
-                await this.processAIMessage({ message, context }, await this.configRepo.getAIModels(), await this.configRepo.getLanguages());
+                await this.processAIMessage(
+                    { message, context },
+                    await this.configRepo.getAIModels(),
+                    await this.configRepo.getLanguages(),
+                );
             }
         }
     }

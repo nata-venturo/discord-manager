@@ -30,7 +30,7 @@ describe('ConfigRepository', () => {
         it('should load AI models from file', async () => {
             const mockModels = [
                 { id: 'model1', name: 'Model 1', description: 'Test model 1' },
-                { id: 'model2', name: 'Model 2', description: 'Test model 2' }
+                { id: 'model2', name: 'Model 2', description: 'Test model 2' },
             ];
 
             sandbox.stub(configRepo, 'loadFileJson').resolves(mockModels);
@@ -68,15 +68,13 @@ describe('ConfigRepository', () => {
         });
 
         it('should validate model structure', async () => {
-            const mockModels = [
-                { id: 'model1', name: 'Model 1', description: 'Test' }
-            ];
+            const mockModels = [{ id: 'model1', name: 'Model 1', description: 'Test' }];
 
             sandbox.stub(configRepo, 'loadFileJson').resolves(mockModels);
 
             const models = await configRepo.getAIModels();
 
-            models.forEach(model => {
+            models.forEach((model) => {
                 expect(model).to.have.property('id');
                 expect(model).to.have.property('name');
                 expect(model).to.have.property('description');
@@ -88,7 +86,7 @@ describe('ConfigRepository', () => {
         it('should load languages from file', async () => {
             const mockLanguages = [
                 { id: 'en', name: 'English', codes: ['en'] },
-                { id: 'id', name: 'Indonesian', codes: ['id'] }
+                { id: 'id', name: 'Indonesian', codes: ['id'] },
             ];
 
             sandbox.stub(configRepo, 'loadFileJson').resolves(mockLanguages);
@@ -126,15 +124,13 @@ describe('ConfigRepository', () => {
         });
 
         it('should validate language structure', async () => {
-            const mockLanguages = [
-                { id: 'en', name: 'English', codes: ['en'] }
-            ];
+            const mockLanguages = [{ id: 'en', name: 'English', codes: ['en'] }];
 
             sandbox.stub(configRepo, 'loadFileJson').resolves(mockLanguages);
 
             const languages = await configRepo.getLanguages();
 
-            languages.forEach(lang => {
+            languages.forEach((lang) => {
                 expect(lang).to.have.property('id');
                 expect(lang).to.have.property('name');
                 expect(lang).to.have.property('codes');
@@ -147,7 +143,7 @@ describe('ConfigRepository', () => {
         it('should load bad words configuration', async () => {
             const mockBadWords = {
                 languages: ['en', 'id'],
-                words: ['badword1', 'badword2']
+                words: ['badword1', 'badword2'],
             };
 
             sandbox.stub(configRepo, 'loadFileJson').resolves(mockBadWords);
@@ -190,7 +186,7 @@ describe('ConfigRepository', () => {
         it('should load quotes from file', async () => {
             const mockQuotes = [
                 { text: 'Quote 1', author: 'Author 1' },
-                { text: 'Quote 2', author: 'Author 2' }
+                { text: 'Quote 2', author: 'Author 2' },
             ];
 
             sandbox.stub(configRepo, 'loadFileJson').resolves(mockQuotes);
@@ -228,15 +224,13 @@ describe('ConfigRepository', () => {
         });
 
         it('should validate quote structure', async () => {
-            const mockQuotes = [
-                { text: 'Quote 1', author: 'Author 1' }
-            ];
+            const mockQuotes = [{ text: 'Quote 1', author: 'Author 1' }];
 
             sandbox.stub(configRepo, 'loadFileJson').resolves(mockQuotes);
 
             const quotes = await configRepo.getQuotes();
 
-            quotes.forEach(quote => {
+            quotes.forEach((quote) => {
                 expect(quote).to.have.property('text');
                 expect(quote).to.have.property('author');
             });
@@ -247,7 +241,7 @@ describe('ConfigRepository', () => {
         it('should return model by ID', async () => {
             const mockModels = [
                 { id: 'model1', name: 'Model 1', description: 'Test 1' },
-                { id: 'model2', name: 'Model 2', description: 'Test 2' }
+                { id: 'model2', name: 'Model 2', description: 'Test 2' },
             ];
 
             sandbox.stub(configRepo, 'loadFileJson').resolves(mockModels);
@@ -258,9 +252,7 @@ describe('ConfigRepository', () => {
         });
 
         it('should return null for non-existent ID', async () => {
-            const mockModels = [
-                { id: 'model1', name: 'Model 1', description: 'Test 1' }
-            ];
+            const mockModels = [{ id: 'model1', name: 'Model 1', description: 'Test 1' }];
 
             sandbox.stub(configRepo, 'loadFileJson').resolves(mockModels);
 
@@ -270,9 +262,7 @@ describe('ConfigRepository', () => {
         });
 
         it('should use cached models', async () => {
-            const mockModels = [
-                { id: 'model1', name: 'Model 1', description: 'Test 1' }
-            ];
+            const mockModels = [{ id: 'model1', name: 'Model 1', description: 'Test 1' }];
 
             const loadStub = sandbox.stub(configRepo, 'loadFileJson').resolves(mockModels);
 
@@ -308,10 +298,14 @@ describe('ConfigRepository', () => {
             const mockModels = [{ id: 'model1', name: 'Model 1' }];
             const mockLanguages = [{ id: 'en', name: 'English', codes: ['en'] }];
 
-            sandbox.stub(configRepo, 'loadFileJson')
-                .onFirstCall().resolves(mockModels)
-                .onSecondCall().resolves(mockLanguages)
-                .onThirdCall().resolves(mockModels);
+            sandbox
+                .stub(configRepo, 'loadFileJson')
+                .onFirstCall()
+                .resolves(mockModels)
+                .onSecondCall()
+                .resolves(mockLanguages)
+                .onThirdCall()
+                .resolves(mockModels);
 
             // Load and cache both
             await configRepo.getAIModels();
@@ -332,11 +326,16 @@ describe('ConfigRepository', () => {
             const mockModels = [{ id: 'model1', name: 'Model 1' }];
             const mockLanguages = [{ id: 'en', name: 'English', codes: ['en'] }];
 
-            const loadStub = sandbox.stub(configRepo, 'loadFileJson')
-                .onFirstCall().resolves(mockModels)
-                .onSecondCall().resolves(mockLanguages)
-                .onThirdCall().resolves(mockModels)
-                .onCall(3).resolves(mockLanguages);
+            const loadStub = sandbox
+                .stub(configRepo, 'loadFileJson')
+                .onFirstCall()
+                .resolves(mockModels)
+                .onSecondCall()
+                .resolves(mockLanguages)
+                .onThirdCall()
+                .resolves(mockModels)
+                .onCall(3)
+                .resolves(mockLanguages);
 
             // Initial load
             await configRepo.getAIModels();

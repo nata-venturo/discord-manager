@@ -27,7 +27,7 @@ describe('TranslationService', () => {
         const supportedLanguages = [
             { id: 'en', name: 'English', codes: ['en'] },
             { id: 'id', name: 'Indonesian', codes: ['id'] },
-            { id: 'es', name: 'Spanish', codes: ['es'] }
+            { id: 'es', name: 'Spanish', codes: ['es'] },
         ];
 
         it('should detect English text', () => {
@@ -132,7 +132,7 @@ describe('TranslationService', () => {
         const quotes = [
             { text: 'To be or not to be', author: 'Shakespeare' },
             { text: 'I think therefore I am', author: 'Descartes' },
-            { text: 'Knowledge is power', author: 'Bacon' }
+            { text: 'Knowledge is power', author: 'Bacon' },
         ];
 
         it('should return random quote', async () => {
@@ -211,7 +211,7 @@ describe('TranslationService', () => {
     describe('getLanguageCode', () => {
         const languages = [
             { id: 'en', name: 'English', codes: ['en'] },
-            { id: 'id', name: 'Indonesian', codes: ['id', 'ind'] }
+            { id: 'id', name: 'Indonesian', codes: ['id', 'ind'] },
         ];
 
         it('should return language code for valid language name', () => {

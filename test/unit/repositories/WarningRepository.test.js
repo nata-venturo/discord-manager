@@ -27,8 +27,8 @@ describe('WarningRepository', () => {
     describe('load', () => {
         it('should load warnings from file', async () => {
             const mockWarnings = {
-                'user1': 3,
-                'user2': 5
+                user1: 3,
+                user2: 5,
             };
 
             sandbox.stub(warningRepo, 'loadFileJson').resolves(mockWarnings);
@@ -60,8 +60,8 @@ describe('WarningRepository', () => {
             const saveStub = sandbox.stub(warningRepo, 'saveFileJson').resolves();
 
             warningRepo.warnings = {
-                'user1': 2,
-                'user2': 4
+                user1: 2,
+                user2: 4,
             };
 
             await warningRepo.save();
@@ -73,7 +73,7 @@ describe('WarningRepository', () => {
         it('should throw FileIOError on save failure', async () => {
             sandbox.stub(warningRepo, 'saveFileJson').rejects(new Error('Permission denied'));
 
-            warningRepo.warnings = { 'user1': 1 };
+            warningRepo.warnings = { user1: 1 };
 
             try {
                 await warningRepo.save();
@@ -87,7 +87,7 @@ describe('WarningRepository', () => {
         it('should create file if it does not exist', async () => {
             const saveStub = sandbox.stub(warningRepo, 'saveFileJson').resolves();
 
-            warningRepo.warnings = { 'user1': 1 };
+            warningRepo.warnings = { user1: 1 };
 
             await warningRepo.save();
 
@@ -98,8 +98,8 @@ describe('WarningRepository', () => {
     describe('getWarnings', () => {
         beforeEach(async () => {
             sandbox.stub(warningRepo, 'loadFileJson').resolves({
-                'user1': 3,
-                'user2': 5
+                user1: 3,
+                user2: 5,
             });
             await warningRepo.load();
         });
@@ -132,7 +132,7 @@ describe('WarningRepository', () => {
     describe('incrementWarning', () => {
         beforeEach(async () => {
             sandbox.stub(warningRepo, 'loadFileJson').resolves({
-                'user1': 2
+                user1: 2,
             });
             await warningRepo.load();
         });
@@ -186,8 +186,8 @@ describe('WarningRepository', () => {
     describe('clearWarnings', () => {
         beforeEach(async () => {
             sandbox.stub(warningRepo, 'loadFileJson').resolves({
-                'user1': 5,
-                'user2': 3
+                user1: 5,
+                user2: 3,
             });
             await warningRepo.load();
         });
@@ -230,9 +230,9 @@ describe('WarningRepository', () => {
     describe('clearAllWarnings', () => {
         beforeEach(async () => {
             sandbox.stub(warningRepo, 'loadFileJson').resolves({
-                'user1': 5,
-                'user2': 3,
-                'user3': 7
+                user1: 5,
+                user2: 3,
+                user3: 7,
             });
             await warningRepo.load();
         });
@@ -257,8 +257,8 @@ describe('WarningRepository', () => {
     describe('getAllWarnings', () => {
         beforeEach(async () => {
             sandbox.stub(warningRepo, 'loadFileJson').resolves({
-                'user1': 5,
-                'user2': 3
+                user1: 5,
+                user2: 3,
             });
             await warningRepo.load();
         });
@@ -267,8 +267,8 @@ describe('WarningRepository', () => {
             const allWarnings = warningRepo.getAllWarnings();
 
             expect(allWarnings).to.deep.equal({
-                'user1': 5,
-                'user2': 3
+                user1: 5,
+                user2: 3,
             });
         });
 
@@ -295,9 +295,9 @@ describe('WarningRepository', () => {
     describe('getUserCount', () => {
         beforeEach(async () => {
             sandbox.stub(warningRepo, 'loadFileJson').resolves({
-                'user1': 5,
-                'user2': 3,
-                'user3': 1
+                user1: 5,
+                user2: 3,
+                user3: 1,
             });
             await warningRepo.load();
         });
@@ -323,10 +323,10 @@ describe('WarningRepository', () => {
     describe('getTopOffenders', () => {
         beforeEach(async () => {
             sandbox.stub(warningRepo, 'loadFileJson').resolves({
-                'user1': 10,
-                'user2': 5,
-                'user3': 15,
-                'user4': 3
+                user1: 10,
+                user2: 5,
+                user3: 15,
+                user4: 3,
             });
             await warningRepo.load();
         });

@@ -287,7 +287,7 @@ describe('MessageQueueService', () => {
 
             const processor = sandbox.stub().callsFake(async () => {
                 processingState = messageQueue.isCurrentlyProcessing();
-                await new Promise(resolve => setTimeout(resolve, 10));
+                await new Promise((resolve) => setTimeout(resolve, 10));
             });
 
             messageQueue.setProcessor(processor);

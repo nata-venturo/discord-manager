@@ -12,13 +12,13 @@ export const mockAIModels = [
     {
         id: 'gemini-1.5-flash',
         name: 'Gemini 1.5 Flash',
-        description: 'You are a helpful AI assistant'
+        description: 'You are a helpful AI assistant',
     },
     {
         id: 'gemini-1.5-pro',
         name: 'Gemini 1.5 Pro',
-        description: 'You are an advanced AI assistant'
-    }
+        description: 'You are an advanced AI assistant',
+    },
 ];
 
 /**
@@ -28,7 +28,7 @@ export const mockLanguages = [
     { id: 'auto', name: 'Auto', codes: ['auto'] },
     { id: 'en', name: 'English', codes: ['en'] },
     { id: 'id', name: 'Indonesian', codes: ['id', 'ind'] },
-    { id: 'es', name: 'Spanish', codes: ['es'] }
+    { id: 'es', name: 'Spanish', codes: ['es'] },
 ];
 
 /**
@@ -36,7 +36,7 @@ export const mockLanguages = [
  */
 export const mockBadWords = {
     languages: ['en', 'id'],
-    words: ['badword1', 'badword2', 'offensive', 'inappropriate']
+    words: ['badword1', 'badword2', 'offensive', 'inappropriate'],
 };
 
 /**
@@ -46,7 +46,7 @@ export const mockQuotes = [
     { text: 'To be or not to be, that is the question', author: 'William Shakespeare' },
     { text: 'I think, therefore I am', author: 'René Descartes' },
     { text: 'Knowledge is power', author: 'Francis Bacon' },
-    { text: 'The only way to do great work is to love what you do', author: 'Steve Jobs' }
+    { text: 'The only way to do great work is to love what you do', author: 'Steve Jobs' },
 ];
 
 /**
@@ -55,7 +55,7 @@ export const mockQuotes = [
 export const mockDiscordTokens = {
     valid: 'YOUR_DISCORD_BOT_TOKEN',
     invalid: 'short',
-    malformed: '!!!invalid!!!token!!!'
+    malformed: '!!!invalid!!!token!!!',
 };
 
 /**
@@ -64,7 +64,7 @@ export const mockDiscordTokens = {
 export const mockChannelIds = {
     valid: '987654321098765432',
     invalid: 'abc123',
-    nonExistent: '999999999999999999'
+    nonExistent: '999999999999999999',
 };
 
 /**
@@ -76,22 +76,22 @@ export const mockUsers = {
         tag: 'NormalUser#1234',
         username: 'NormalUser',
         discriminator: '1234',
-        bot: false
+        bot: false,
     },
     bot: {
         id: '222222222222222222',
         tag: 'BotUser#5678',
         username: 'BotUser',
         discriminator: '5678',
-        bot: true
+        bot: true,
     },
     moderator: {
         id: '333333333333333333',
         tag: 'Moderator#9012',
         username: 'Moderator',
         discriminator: '9012',
-        bot: false
-    }
+        bot: false,
+    },
 };
 
 /**
@@ -102,42 +102,42 @@ export const mockMessages = {
         id: 'msg001',
         content: 'Hello, world!',
         author: mockUsers.normal,
-        createdTimestamp: Date.now()
+        createdTimestamp: Date.now(),
     },
     withLink: {
         id: 'msg002',
         content: 'Check out this link: https://example.com',
         author: mockUsers.normal,
-        createdTimestamp: Date.now()
+        createdTimestamp: Date.now(),
     },
     withMention: {
         id: 'msg003',
         content: '@everyone Hello!',
         author: mockUsers.normal,
-        createdTimestamp: Date.now()
+        createdTimestamp: Date.now(),
     },
     withBadWords: {
         id: 'msg004',
         content: 'This contains badword1 and offensive content',
         author: mockUsers.normal,
-        createdTimestamp: Date.now()
+        createdTimestamp: Date.now(),
     },
     empty: {
         id: 'msg005',
         content: '',
         author: mockUsers.normal,
-        createdTimestamp: Date.now()
-    }
+        createdTimestamp: Date.now(),
+    },
 };
 
 /**
  * Mock warnings data
  */
 export const mockWarnings = {
-    'user001': 2,
-    'user002': 5,
-    'user003': 10,
-    'user004': 15
+    user001: 2,
+    user002: 5,
+    user003: 10,
+    user004: 15,
 };
 
 /**
@@ -147,8 +147,8 @@ export const mockEmojis = {
     unicode: ['👍', '❤️', '😊', '🔥', '✅'],
     custom: [
         { id: 'emoji001', name: 'custom1', requiresColons: true, animated: false },
-        { id: 'emoji002', name: 'custom2', requiresColons: true, animated: false }
-    ]
+        { id: 'emoji002', name: 'custom2', requiresColons: true, animated: false },
+    ],
 };
 
 /**
@@ -157,11 +157,11 @@ export const mockEmojis = {
 export const mockConfig = {
     discord: {
         token: mockDiscordTokens.valid,
-        channelId: mockChannelIds.valid
+        channelId: mockChannelIds.valid,
     },
     ai: {
         modelId: 'gemini-1.5-flash',
-        language: 'English'
+        language: 'English',
     },
     moderation: {
         enabled: true,
@@ -169,14 +169,14 @@ export const mockConfig = {
             timeout1: 3,
             timeout2: 7,
             timeout3: 10,
-            kick: 15
-        }
+            kick: 15,
+        },
     },
     timing: {
         messageDelay: 5000,
         defaultDelay: 60000,
-        queueCheckInterval: 1000
-    }
+        queueCheckInterval: 1000,
+    },
 };
 
 /**
@@ -185,12 +185,12 @@ export const mockConfig = {
 export const mockAPIResponses = {
     geminiSuccess: {
         response: {
-            text: () => 'This is a generated AI response'
-        }
+            text: () => 'This is a generated AI response',
+        },
     },
     geminiError: new Error('API quota exceeded'),
     translationSuccess: 'Hola, mundo!',
-    translationError: new Error('Translation service unavailable')
+    translationError: new Error('Translation service unavailable'),
 };
 
 /**
@@ -202,7 +202,7 @@ export const mockFilePaths = {
     badWords: './config/badWords.json',
     quotes: './config/quotes.json',
     warnings: './data/warnings.json',
-    logs: './logs/app.log'
+    logs: './logs/app.log',
 };
 
 /**
@@ -219,7 +219,7 @@ export function createTestMessage(overrides = {}) {
         createdTimestamp: Date.now(),
         attachments: new Map(),
         mentions: { users: new Map() },
-        ...overrides
+        ...overrides,
     };
 }
 
@@ -234,6 +234,6 @@ export function createTestContext(overrides = {}) {
         language: 'English',
         languageId: 'en',
         delay: 60000,
-        ...overrides
+        ...overrides,
     };
 }

@@ -9,7 +9,12 @@ import { describe, it, beforeEach, afterEach } from 'mocha';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { ModerationCommand } from '../../src/commands/ModerationCommand.js';
-import { createMockDiscordClient, createMockChannel, createMockMessage, createMockMember } from '../helpers/mockDiscordClient.js';
+import {
+    createMockDiscordClient,
+    createMockChannel,
+    createMockMessage,
+    createMockMember,
+} from '../helpers/mockDiscordClient.js';
 import { mockBadWords } from '../helpers/fixtures.js';
 
 describe('ModerationCommand Integration', () => {
@@ -37,7 +42,7 @@ describe('ModerationCommand Integration', () => {
 
             // Setup bad words
             sandbox.stub(moderationCommand.configRepo, 'getBadWords').resolves(mockBadWords);
-            await moderationCommand.configRepo.getBadWords().then(config => {
+            await moderationCommand.configRepo.getBadWords().then((config) => {
                 moderationCommand.moderationService.setBadWordsConfig(config);
             });
 
@@ -54,13 +59,13 @@ describe('ModerationCommand Integration', () => {
             const sendStub = sandbox.stub(moderationCommand.discordService, 'sendMessage').resolves();
 
             // Setup moderation service
-            const containsStub = sandbox.stub(moderationCommand.moderationService, 'containsBadWords').returns(true);
+            sandbox.stub(moderationCommand.moderationService, 'containsBadWords').returns(true);
             sandbox.stub(moderationCommand.moderationService, 'getDetectedBadWords').returns(['badword1']);
             sandbox.stub(moderationCommand.moderationService, 'getModerationAction').returns({
                 type: 'timeout',
                 duration: 300000,
                 message: '5 minute timeout',
-                gif: 'https://example.com/timeout.gif'
+                gif: 'https://example.com/timeout.gif',
             });
 
             const mockMember = createMockMember({ id: '999' });
@@ -70,7 +75,7 @@ describe('ModerationCommand Integration', () => {
             const message = createMockMessage({
                 content: 'This contains badword1',
                 author: { id: '999', tag: 'BadUser#1234', bot: false },
-                member: mockMember
+                member: mockMember,
             });
 
             await moderationCommand.moderateMessage(message);
@@ -83,7 +88,7 @@ describe('ModerationCommand Integration', () => {
 
         it('should kick user after reaching kick threshold', async () => {
             sandbox.stub(moderationCommand.configRepo, 'getBadWords').resolves(mockBadWords);
-            await moderationCommand.configRepo.getBadWords().then(config => {
+            await moderationCommand.configRepo.getBadWords().then((config) => {
                 moderationCommand.moderationService.setBadWordsConfig(config);
             });
 
@@ -99,7 +104,7 @@ describe('ModerationCommand Integration', () => {
             sandbox.stub(moderationCommand.moderationService, 'getModerationAction').returns({
                 type: 'kick',
                 message: 'kicked from server',
-                gif: 'https://example.com/kick.gif'
+                gif: 'https://example.com/kick.gif',
             });
 
             const mockMember = createMockMember({ id: '999' });
@@ -108,7 +113,7 @@ describe('ModerationCommand Integration', () => {
             const message = createMockMessage({
                 content: 'badword1',
                 author: { id: '999', tag: 'BadUser#1234', bot: false },
-                member: mockMember
+                member: mockMember,
             });
 
             await moderationCommand.moderateMessage(message);
@@ -120,11 +125,11 @@ describe('ModerationCommand Integration', () => {
     describe('Warning system integration', () => {
         it('should track warnings across multiple violations', async () => {
             sandbox.stub(moderationCommand.configRepo, 'getBadWords').resolves(mockBadWords);
-            await moderationCommand.configRepo.getBadWords().then(config => {
+            await moderationCommand.configRepo.getBadWords().then((config) => {
                 moderationCommand.moderationService.setBadWordsConfig(config);
             });
 
-            const warnings = { 'user999': 0 };
+            const warnings = { user999: 0 };
             sandbox.stub(moderationCommand.warningRepo, 'load').resolves();
             sandbox.stub(moderationCommand.warningRepo, 'incrementWarning').callsFake((userId) => {
                 warnings[userId] = (warnings[userId] || 0) + 1;
@@ -146,29 +151,35 @@ describe('ModerationCommand Integration', () => {
             const mockMember = createMockMember({ id: '999' });
 
             // First violation
-            await moderationCommand.moderateMessage(createMockMessage({
-                content: 'badword',
-                author: { id: '999', tag: 'User#1234', bot: false },
-                member: mockMember
-            }));
+            await moderationCommand.moderateMessage(
+                createMockMessage({
+                    content: 'badword',
+                    author: { id: '999', tag: 'User#1234', bot: false },
+                    member: mockMember,
+                }),
+            );
 
             expect(warnings['user999']).to.equal(1);
 
             // Second violation
-            await moderationCommand.moderateMessage(createMockMessage({
-                content: 'badword',
-                author: { id: '999', tag: 'User#1234', bot: false },
-                member: mockMember
-            }));
+            await moderationCommand.moderateMessage(
+                createMockMessage({
+                    content: 'badword',
+                    author: { id: '999', tag: 'User#1234', bot: false },
+                    member: mockMember,
+                }),
+            );
 
             expect(warnings['user999']).to.equal(2);
 
             // Third violation
-            await moderationCommand.moderateMessage(createMockMessage({
-                content: 'badword',
-                author: { id: '999', tag: 'User#1234', bot: false },
-                member: mockMember
-            }));
+            await moderationCommand.moderateMessage(
+                createMockMessage({
+                    content: 'badword',
+                    author: { id: '999', tag: 'User#1234', bot: false },
+                    member: mockMember,
+                }),
+            );
 
             expect(warnings['user999']).to.equal(3);
         });

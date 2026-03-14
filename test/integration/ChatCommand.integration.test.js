@@ -60,7 +60,7 @@ describe('ChatCommand Integration', () => {
                 languageId: 'en',
                 typeId: 'Send to Channel',
                 typeName: 'Send to Channel',
-                delay: 1000
+                delay: 1000,
             };
 
             // Setup message queue processor
@@ -71,7 +71,7 @@ describe('ChatCommand Integration', () => {
             // Simulate incoming message
             const message = createMockMessage({
                 content: 'Hello AI!',
-                author: { id: '999', tag: 'User#1234', bot: false }
+                author: { id: '999', tag: 'User#1234', bot: false },
             });
 
             await chatCommand.handleIncomingMessage(message, mockChannel.id);
@@ -83,7 +83,7 @@ describe('ChatCommand Integration', () => {
         });
 
         it('should detect language automatically when set to auto', async () => {
-            const mockChannel = createMockChannel({ id: '123' });
+            createMockChannel({ id: '123' });
 
             sandbox.stub(chatCommand.configRepo, 'getAIModels').resolves(mockAIModels);
             sandbox.stub(chatCommand.configRepo, 'getLanguages').resolves(mockLanguages);
@@ -101,7 +101,7 @@ describe('ChatCommand Integration', () => {
                 languageId: 'auto',
                 language: 'Auto',
                 typeId: 'Send to Channel',
-                delay: 1000
+                delay: 1000,
             };
 
             const message = createMockMessage({ content: 'Halo, apa kabar?' });
@@ -127,7 +127,7 @@ describe('ChatCommand Integration', () => {
             sandbox.stub(chatCommand.translationService, 'getRandomQuote').resolves({
                 original: 'Test quote',
                 translated: 'Test quote',
-                author: 'Author'
+                author: 'Author',
             });
 
             chatCommand.config = {
@@ -135,7 +135,7 @@ describe('ChatCommand Integration', () => {
                 languageId: 'en',
                 language: 'English',
                 delay: 100,
-                deleteDelay: 100
+                deleteDelay: 100,
             };
 
             // Mock showCountdown to resolve immediately
@@ -145,14 +145,14 @@ describe('ChatCommand Integration', () => {
             const promise = chatCommand.startQuoteMode(mockChannel, mockQuotes);
 
             // Give it time to run one iteration
-            await new Promise(resolve => setTimeout(resolve, 50));
+            await new Promise((resolve) => setTimeout(resolve, 50));
 
             // Stop the loop by rejecting
             chatCommand.stop();
 
             try {
                 await promise;
-            } catch (error) {
+            } catch {
                 // Expected to be stopped
             }
 
@@ -171,19 +171,19 @@ describe('ChatCommand Integration', () => {
             chatCommand.messageQueue.enqueue({
                 message: { id: 'msg1' },
                 context: {},
-                priority: false
+                priority: false,
             });
 
             chatCommand.messageQueue.enqueue({
                 message: { id: 'msg2' },
                 context: {},
-                priority: true
+                priority: true,
             });
 
             chatCommand.messageQueue.enqueue({
                 message: { id: 'msg3' },
                 context: {},
-                priority: false
+                priority: false,
             });
 
             await chatCommand.messageQueue.processNext();

@@ -70,11 +70,7 @@ export class ModerationCommand {
      */
     async handleMessage(message, channelId) {
         // Ignore bots, wrong channel, and allowed users
-        if (
-            message.author.bot ||
-            message.channel.id !== channelId ||
-            this.allowedUsers.includes(message.author.tag)
-        ) {
+        if (message.author.bot || message.channel.id !== channelId || this.allowedUsers.includes(message.author.tag)) {
             return;
         }
 
@@ -114,7 +110,7 @@ export class ModerationCommand {
             if (action.type === 'warning') {
                 await this.discordService.sendMessage(
                     message.channel.id,
-                    `${message.author} using the word ||**${badWords.join(', ')}**|| is inappropriate and prohibited here, ${action.message}.`
+                    `${message.author} using the word ||**${badWords.join(', ')}**|| is inappropriate and prohibited here, ${action.message}.`,
                 );
                 await this.discordService.sendMessage(message.channel.id, action.gif);
             }
@@ -125,14 +121,9 @@ export class ModerationCommand {
 
                 if (applied) {
                     const actionText =
-                        action.type === 'timeout'
-                            ? `has been given a ${action.message}`
-                            : `has been ${action.message}`;
+                        action.type === 'timeout' ? `has been given a ${action.message}` : `has been ${action.message}`;
 
-                    await this.discordService.sendMessage(
-                        message.channel.id,
-                        `${message.author} ${actionText}.`
-                    );
+                    await this.discordService.sendMessage(message.channel.id, `${message.author} ${actionText}.`);
                     await this.discordService.sendMessage(message.channel.id, action.gif);
 
                     // Clear warnings if kicked

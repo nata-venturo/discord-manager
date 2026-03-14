@@ -187,9 +187,7 @@ export class ReactionCommand {
             const serverEmojiList = serverEmojis.map((emoji) => emoji.toString());
 
             const allEmojis =
-                serverEmojiList.length > 0
-                    ? [...serverEmojiList, ...REACTION.DEFAULT_EMOJIS]
-                    : REACTION.DEFAULT_EMOJIS;
+                serverEmojiList.length > 0 ? [...serverEmojiList, ...REACTION.DEFAULT_EMOJIS] : REACTION.DEFAULT_EMOJIS;
 
             return allEmojis[Math.floor(Math.random() * allEmojis.length)];
         } catch (error) {

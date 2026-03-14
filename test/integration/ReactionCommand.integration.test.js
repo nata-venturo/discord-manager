@@ -9,7 +9,12 @@ import { describe, it, beforeEach, afterEach } from 'mocha';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { ReactionCommand } from '../../src/commands/ReactionCommand.js';
-import { createMockDiscordClient, createMockChannel, createMockMessage, createMockGuild } from '../helpers/mockDiscordClient.js';
+import {
+    createMockDiscordClient,
+    createMockChannel,
+    createMockMessage,
+    createMockGuild,
+} from '../helpers/mockDiscordClient.js';
 
 describe('ReactionCommand Integration', () => {
     let reactionCommand;
@@ -42,7 +47,7 @@ describe('ReactionCommand Integration', () => {
             reactionCommand.config = {
                 mode: 'All Without Delay',
                 delayType: 'Automatic',
-                delay: 0
+                delay: 0,
             };
 
             // Setup queue processor
@@ -54,7 +59,7 @@ describe('ReactionCommand Integration', () => {
                 content: 'Hello, this is a test message',
                 author: { id: '999', tag: 'User#1234', bot: false },
                 guild: mockGuild,
-                channel: mockChannel
+                channel: mockChannel,
             });
 
             await reactionCommand.handleMessage(message, mockChannel.id);
@@ -69,7 +74,7 @@ describe('ReactionCommand Integration', () => {
 
             const message = createMockMessage({
                 content: 'Check out https://example.com',
-                author: { id: '999', tag: 'User#1234', bot: false }
+                author: { id: '999', tag: 'User#1234', bot: false },
             });
 
             await reactionCommand.handleMessage(message, '123');
@@ -80,7 +85,7 @@ describe('ReactionCommand Integration', () => {
 
         it('should process reactions with delay in "All With Delay" mode', async () => {
             const mockGuild = createMockGuild({ withEmojis: true });
-            const mockChannel = createMockChannel({ guild: mockGuild });
+            createMockChannel({ guild: mockGuild });
 
             sandbox.stub(reactionCommand.discordService, 'addReaction').resolves();
             sandbox.stub(reactionCommand, 'showCountdown').resolves();
@@ -88,12 +93,12 @@ describe('ReactionCommand Integration', () => {
             reactionCommand.config = {
                 mode: 'All With Delay',
                 delayType: 'Manual',
-                delay: 5000
+                delay: 5000,
             };
 
             const message = createMockMessage({
                 content: 'Test message',
-                guild: mockGuild
+                guild: mockGuild,
             });
 
             await reactionCommand.processReaction({ message });
@@ -110,14 +115,14 @@ describe('ReactionCommand Integration', () => {
             reactionCommand.config = {
                 mode: 'Random',
                 delayType: 'Automatic',
-                delay: 0
+                delay: 0,
             };
 
             const processed = [];
             for (let i = 0; i < 100; i++) {
                 const message = createMockMessage({
                     content: `Test message ${i}`,
-                    author: { id: '999', tag: 'User#1234', bot: false }
+                    author: { id: '999', tag: 'User#1234', bot: false },
                 });
 
                 await reactionCommand.handleMessage(message, '123');

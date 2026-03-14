@@ -28,7 +28,7 @@ describe('ModerationService', () => {
         it('should set bad words configuration', () => {
             const config = {
                 languages: ['en'],
-                words: ['badword1', 'badword2']
+                words: ['badword1', 'badword2'],
             };
 
             moderationService.setBadWordsConfig(config);
@@ -49,7 +49,7 @@ describe('ModerationService', () => {
         beforeEach(() => {
             const config = {
                 languages: ['en'],
-                words: ['badword', 'offensive']
+                words: ['badword', 'offensive'],
             };
             moderationService.setBadWordsConfig(config);
         });
@@ -100,7 +100,7 @@ describe('ModerationService', () => {
         beforeEach(() => {
             const config = {
                 languages: ['en'],
-                words: ['badword', 'offensive']
+                words: ['badword', 'offensive'],
             };
             moderationService.setBadWordsConfig(config);
         });
@@ -197,7 +197,7 @@ describe('ModerationService', () => {
             mockMember = {
                 id: '123456',
                 timeout: sandbox.stub().resolves(),
-                kick: sandbox.stub().resolves()
+                kick: sandbox.stub().resolves(),
             };
         });
 
@@ -205,7 +205,7 @@ describe('ModerationService', () => {
             const action = {
                 type: 'timeout',
                 duration: 300000,
-                message: '5 minute timeout'
+                message: '5 minute timeout',
             };
 
             const result = await moderationService.applyModerationAction(mockMember, action);
@@ -218,7 +218,7 @@ describe('ModerationService', () => {
         it('should apply kick action', async () => {
             const action = {
                 type: 'kick',
-                message: 'kicked from server'
+                message: 'kicked from server',
             };
 
             const result = await moderationService.applyModerationAction(mockMember, action);
@@ -230,7 +230,7 @@ describe('ModerationService', () => {
         it('should return false for warning action', async () => {
             const action = {
                 type: 'warning',
-                message: 'this is a warning'
+                message: 'this is a warning',
             };
 
             const result = await moderationService.applyModerationAction(mockMember, action);
@@ -246,7 +246,7 @@ describe('ModerationService', () => {
             const action = {
                 type: 'timeout',
                 duration: 300000,
-                message: '5 minute timeout'
+                message: '5 minute timeout',
             };
 
             const result = await moderationService.applyModerationAction(mockMember, action);
@@ -259,7 +259,7 @@ describe('ModerationService', () => {
 
             const action = {
                 type: 'kick',
-                message: 'kicked'
+                message: 'kicked',
             };
 
             const result = await moderationService.applyModerationAction(mockMember, action);

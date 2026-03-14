@@ -46,16 +46,13 @@ export class FaucetCommand {
             const token = await promptDiscordToken();
             const channelId = await promptChannelId();
 
-            this.config.mangoAddress = await promptText(
-                'Enter Mango address',
-                (value) => {
-                    if (!value.trim()) return 'Mango address is required';
-                    if (!validators.blockchainAddress(value)) {
-                        return 'Invalid Mango address format';
-                    }
-                    return true;
+            this.config.mangoAddress = await promptText('Enter Mango address', (value) => {
+                if (!value.trim()) return 'Mango address is required';
+                if (!validators.blockchainAddress(value)) {
+                    return 'Invalid Mango address format';
                 }
-            );
+                return true;
+            });
 
             this.config.delay = await promptDelay('Enter claim interval', 60000);
 
@@ -126,7 +123,7 @@ export class FaucetCommand {
                     channelId,
                     this.discordService.getCurrentUser().id,
                     token,
-                    this.config.mangoAddress
+                    this.config.mangoAddress,
                 );
 
                 if (!messages || messages.length === 0) {

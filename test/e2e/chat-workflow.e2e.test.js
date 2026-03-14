@@ -37,14 +37,22 @@ describe('Chat Workflow E2E', () => {
             mockClient._addMockChannel(mockChannel);
 
             // Mock user inputs
-            sandbox.stub(prompts, 'prompt')
-                .onFirstCall().resolves({ tokenId: mockDiscordTokens.valid })
-                .onSecondCall().resolves({ channelId: '123456789012345678' })
-                .onThirdCall().resolves({ selected: 'Talk With AI' })
-                .onCall(3).resolves({ selected: 'gemini-1.5-flash' })
-                .onCall(4).resolves({ selected: 'en' })
-                .onCall(5).resolves({ selected: 'Send to Channel' })
-                .onCall(6).resolves({ delay: '60000' });
+            sandbox
+                .stub(prompts, 'prompt')
+                .onFirstCall()
+                .resolves({ tokenId: mockDiscordTokens.valid })
+                .onSecondCall()
+                .resolves({ channelId: '123456789012345678' })
+                .onThirdCall()
+                .resolves({ selected: 'Talk With AI' })
+                .onCall(3)
+                .resolves({ selected: 'gemini-1.5-flash' })
+                .onCall(4)
+                .resolves({ selected: 'en' })
+                .onCall(5)
+                .resolves({ selected: 'Send to Channel' })
+                .onCall(6)
+                .resolves({ delay: '60000' });
 
             // Stub config repository
             sandbox.stub(chatCommand.configRepo, 'getAIModels').resolves(mockAIModels);
@@ -67,15 +75,15 @@ describe('Chat Workflow E2E', () => {
             sandbox.stub(chatCommand, 'showCountdown').resolves();
 
             // Setup and run (will be stopped by test)
-            const executePromise = chatCommand.execute();
+            chatCommand.execute();
 
             // Give it time to setup
-            await new Promise(resolve => setTimeout(resolve, 100));
+            await new Promise((resolve) => setTimeout(resolve, 100));
 
             // Simulate incoming message
             const message = createMockMessage({
                 content: 'Hello AI, how are you?',
-                author: { id: '999', tag: 'User#1234', bot: false }
+                author: { id: '999', tag: 'User#1234', bot: false },
             });
 
             chatCommand.messageQueue.setProcessor(async (messageData) => {
@@ -100,13 +108,20 @@ describe('Chat Workflow E2E', () => {
             mockClient._addMockChannel(mockChannel);
 
             // Mock user inputs
-            sandbox.stub(prompts, 'prompt')
-                .onFirstCall().resolves({ tokenId: mockDiscordTokens.valid })
-                .onSecondCall().resolves({ channelId: '123456789012345678' })
-                .onThirdCall().resolves({ selected: 'Quote' })
-                .onCall(3).resolves({ selected: 'en' })
-                .onCall(4).resolves({ delay: '5000' })
-                .onCall(5).resolves({ delay: '3000' });
+            sandbox
+                .stub(prompts, 'prompt')
+                .onFirstCall()
+                .resolves({ tokenId: mockDiscordTokens.valid })
+                .onSecondCall()
+                .resolves({ channelId: '123456789012345678' })
+                .onThirdCall()
+                .resolves({ selected: 'Quote' })
+                .onCall(3)
+                .resolves({ selected: 'en' })
+                .onCall(4)
+                .resolves({ delay: '5000' })
+                .onCall(5)
+                .resolves({ delay: '3000' });
 
             // Stub config repository
             sandbox.stub(chatCommand.configRepo, 'getLanguages').resolves(mockLanguages);
@@ -119,13 +134,13 @@ describe('Chat Workflow E2E', () => {
 
             const sentMessage = createMockMessage({ content: 'Quote text' });
             const sendMessageStub = sandbox.stub(chatCommand.discordService, 'sendMessage').resolves(sentMessage);
-            const deleteMessageStub = sandbox.stub(chatCommand.discordService, 'deleteMessage').resolves();
+            sandbox.stub(chatCommand.discordService, 'deleteMessage').resolves();
 
             // Stub translation service
             sandbox.stub(chatCommand.translationService, 'getRandomQuote').resolves({
                 original: 'To be or not to be',
                 translated: 'To be or not to be',
-                author: 'Shakespeare'
+                author: 'Shakespeare',
             });
 
             // Mock countdown to resolve immediately
@@ -137,21 +152,21 @@ describe('Chat Workflow E2E', () => {
                 languageId: 'en',
                 language: 'English',
                 delay: 100,
-                deleteDelay: 100
+                deleteDelay: 100,
             };
 
             // Run one iteration
             const promise = chatCommand.startQuoteMode(mockChannel, mockQuotes);
 
             // Give it time to run
-            await new Promise(resolve => setTimeout(resolve, 50));
+            await new Promise((resolve) => setTimeout(resolve, 50));
 
             // Stop
             chatCommand.stop();
 
             try {
                 await promise;
-            } catch (error) {
+            } catch {
                 // Expected
             }
 
@@ -162,8 +177,7 @@ describe('Chat Workflow E2E', () => {
 
     describe('Error handling workflow', () => {
         it('should handle invalid token gracefully', async () => {
-            sandbox.stub(prompts, 'prompt')
-                .onFirstCall().resolves({ tokenId: 'invalid' });
+            sandbox.stub(prompts, 'prompt').onFirstCall().resolves({ tokenId: 'invalid' });
 
             sandbox.stub(chatCommand.discordService, 'initialize').rejects(new Error('Invalid token'));
 
@@ -176,7 +190,7 @@ describe('Chat Workflow E2E', () => {
         });
 
         it('should handle AI service errors gracefully', async () => {
-            const mockChannel = createMockChannel({ id: '123' });
+            createMockChannel({ id: '123' });
 
             sandbox.stub(chatCommand.configRepo, 'getAIModels').resolves(mockAIModels);
             sandbox.stub(chatCommand.configRepo, 'getLanguages').resolves(mockLanguages);
@@ -195,7 +209,7 @@ describe('Chat Workflow E2E', () => {
                 languageId: 'en',
                 language: 'English',
                 typeId: 'Send to Channel',
-                delay: 1000
+                delay: 1000,
             };
 
             const message = createMockMessage({ content: 'Hello' });

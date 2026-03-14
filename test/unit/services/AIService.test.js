@@ -29,7 +29,7 @@ describe('AIService', () => {
             const model = {
                 id: 'gemini-1.5-flash',
                 name: 'Gemini 1.5 Flash',
-                description: 'You are a helpful AI assistant'
+                description: 'You are a helpful AI assistant',
             };
             const content = 'Hello, how are you?';
             const language = 'English';
@@ -37,13 +37,13 @@ describe('AIService', () => {
             // Mock Gemini API response
             const mockResult = {
                 response: {
-                    text: () => 'I am doing well, thank you!'
-                }
+                    text: () => 'I am doing well, thank you!',
+                },
             };
 
             // Stub the Gemini model
             sandbox.stub(aiService, 'getGeminiModel').returns({
-                generateContent: sandbox.stub().resolves(mockResult)
+                generateContent: sandbox.stub().resolves(mockResult),
             });
 
             const response = await aiService.generateResponse(model, content, language);
@@ -78,12 +78,12 @@ describe('AIService', () => {
             const model = {
                 id: 'gemini-1.5-flash',
                 name: 'Gemini 1.5 Flash',
-                description: 'Test'
+                description: 'Test',
             };
 
             // Stub to throw error
             sandbox.stub(aiService, 'getGeminiModel').returns({
-                generateContent: sandbox.stub().rejects(new Error('API Error'))
+                generateContent: sandbox.stub().rejects(new Error('API Error')),
             });
 
             try {
@@ -99,19 +99,19 @@ describe('AIService', () => {
             const model = {
                 id: 'gemini-1.5-flash',
                 name: 'Gemini 1.5 Flash',
-                description: 'You are helpful'
+                description: 'You are helpful',
             };
             const content = 'Halo, apa kabar?';
             const language = 'Indonesian';
 
             const mockResult = {
                 response: {
-                    text: () => 'Saya baik, terima kasih!'
-                }
+                    text: () => 'Saya baik, terima kasih!',
+                },
             };
 
             sandbox.stub(aiService, 'getGeminiModel').returns({
-                generateContent: sandbox.stub().resolves(mockResult)
+                generateContent: sandbox.stub().resolves(mockResult),
             });
 
             const response = await aiService.generateResponse(model, content, language);
@@ -123,19 +123,19 @@ describe('AIService', () => {
             const model = {
                 id: 'gemini-1.5-flash',
                 name: 'Gemini 1.5 Flash',
-                description: 'Test'
+                description: 'Test',
             };
             const longContent = 'a'.repeat(10000);
             const language = 'English';
 
             const mockResult = {
                 response: {
-                    text: () => 'Response to long content'
-                }
+                    text: () => 'Response to long content',
+                },
             };
 
             const geminiModel = {
-                generateContent: sandbox.stub().resolves(mockResult)
+                generateContent: sandbox.stub().resolves(mockResult),
             };
             sandbox.stub(aiService, 'getGeminiModel').returns(geminiModel);
 

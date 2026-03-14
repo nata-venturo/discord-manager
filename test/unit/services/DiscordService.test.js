@@ -13,24 +13,11 @@ import { DiscordAPIError, ValidationError } from '../../../src/errors/index.js';
 
 describe('DiscordService', () => {
     let discordService;
-    let mockClient;
     let sandbox;
 
     beforeEach(() => {
         sandbox = sinon.createSandbox();
         discordService = new DiscordService();
-
-        // Create mock client
-        mockClient = {
-            login: sandbox.stub().resolves(),
-            user: { id: '123456789', tag: 'TestUser#1234' },
-            channels: {
-                cache: {
-                    get: sandbox.stub()
-                },
-                fetch: sandbox.stub()
-            }
-        };
     });
 
     afterEach(() => {
@@ -143,7 +130,7 @@ describe('DiscordService', () => {
 
             mockChannel = {
                 id: '123',
-                send: sandbox.stub().resolves({ id: 'msg123', content: 'Hello' })
+                send: sandbox.stub().resolves({ id: 'msg123', content: 'Hello' }),
             };
             discordService.client.channels.cache.get.returns(mockChannel);
         });
@@ -197,7 +184,7 @@ describe('DiscordService', () => {
         it('should delete message successfully', async () => {
             const mockMessage = {
                 id: 'msg123',
-                delete: sandbox.stub().resolves()
+                delete: sandbox.stub().resolves(),
             };
 
             await discordService.deleteMessage(mockMessage);
@@ -208,7 +195,7 @@ describe('DiscordService', () => {
         it('should throw DiscordAPIError on delete failure', async () => {
             const mockMessage = {
                 id: 'msg123',
-                delete: sandbox.stub().rejects(new Error('Missing Permissions'))
+                delete: sandbox.stub().rejects(new Error('Missing Permissions')),
             };
 
             try {
@@ -225,7 +212,7 @@ describe('DiscordService', () => {
         it('should add reaction successfully', async () => {
             const mockMessage = {
                 id: 'msg123',
-                react: sandbox.stub().resolves()
+                react: sandbox.stub().resolves(),
             };
             const emoji = '👍';
 
@@ -238,7 +225,7 @@ describe('DiscordService', () => {
         it('should throw DiscordAPIError on reaction failure', async () => {
             const mockMessage = {
                 id: 'msg123',
-                react: sandbox.stub().rejects(new Error('Unknown Emoji'))
+                react: sandbox.stub().rejects(new Error('Unknown Emoji')),
             };
 
             try {
@@ -262,7 +249,7 @@ describe('DiscordService', () => {
 
             mockChannel = {
                 id: '123',
-                sendTyping: sandbox.stub().resolves()
+                sendTyping: sandbox.stub().resolves(),
             };
             discordService.client.channels.cache.get.returns(mockChannel);
         });
@@ -290,7 +277,7 @@ describe('DiscordService', () => {
         it('should reply to message successfully', async () => {
             const mockMessage = {
                 id: 'msg123',
-                reply: sandbox.stub().resolves({ id: 'reply123', content: 'Reply' })
+                reply: sandbox.stub().resolves({ id: 'reply123', content: 'Reply' }),
             };
             const content = 'This is a reply';
 
@@ -304,7 +291,7 @@ describe('DiscordService', () => {
         it('should sanitize reply content', async () => {
             const mockMessage = {
                 id: 'msg123',
-                reply: sandbox.stub().resolves({ id: 'reply123', content: 'Reply' })
+                reply: sandbox.stub().resolves({ id: 'reply123', content: 'Reply' }),
             };
             const content = '@everyone ```code```';
 
@@ -317,7 +304,7 @@ describe('DiscordService', () => {
         it('should throw DiscordAPIError on reply failure', async () => {
             const mockMessage = {
                 id: 'msg123',
-                reply: sandbox.stub().rejects(new Error('Channel not found'))
+                reply: sandbox.stub().rejects(new Error('Channel not found')),
             };
 
             try {

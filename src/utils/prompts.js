@@ -25,7 +25,7 @@ export const promptDiscordToken = async () => {
             message: 'Enter Discord token',
             validate: (value) => validators.discordToken(value) || 'Invalid Discord token format',
         },
-        { onCancel }
+        { onCancel },
     );
 
     return tokenId;
@@ -44,7 +44,7 @@ export const promptChannelId = async () => {
             message: 'Enter Discord channel ID',
             validate: (value) => validators.channelId(value) || 'Invalid channel ID format',
         },
-        { onCancel }
+        { onCancel },
     );
 
     return channelId;
@@ -70,7 +70,7 @@ export const promptDelay = async (message = 'Enter delay in milliseconds (1000 =
                 return true;
             },
         },
-        { onCancel }
+        { onCancel },
     );
 
     return delay;
@@ -96,7 +96,7 @@ export const promptSelect = async (message, choices) => {
             message,
             choices: formattedChoices,
         },
-        { onCancel }
+        { onCancel },
     );
 
     return selected;
@@ -144,7 +144,7 @@ export const promptConfirm = async (message, initial = false) => {
             message,
             initial,
         },
-        { onCancel }
+        { onCancel },
     );
 
     return confirmed;

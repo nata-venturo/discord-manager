@@ -50,14 +50,12 @@ export class ScheduleCommand {
             this.config.useCustom = customMode === MODES.CUSTOM.CUSTOM;
 
             if (this.config.useCustom) {
-                this.config.gmText = await promptText(
-                    'Enter custom GM message',
-                    (value) => (value.trim() ? true : 'GM message is required')
+                this.config.gmText = await promptText('Enter custom GM message', (value) =>
+                    value.trim() ? true : 'GM message is required',
                 );
 
-                this.config.gnText = await promptText(
-                    'Enter custom GN message',
-                    (value) => (value.trim() ? true : 'GN message is required')
+                this.config.gnText = await promptText('Enter custom GN message', (value) =>
+                    value.trim() ? true : 'GN message is required',
                 );
             }
 

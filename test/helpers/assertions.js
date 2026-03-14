@@ -50,7 +50,7 @@ export function assertIsDiscordToken(token) {
  * Asserts that an object has specific properties
  */
 export function assertHasProperties(obj, properties) {
-    properties.forEach(prop => {
+    properties.forEach((prop) => {
         expect(obj).to.have.property(prop);
     });
 }
@@ -62,9 +62,9 @@ export function assertMessageSent(stub, content) {
     expect(stub.called).to.be.true;
 
     const calls = stub.getCalls();
-    const sentMessages = calls.map(call => call.args[0]);
+    const sentMessages = calls.map((call) => call.args[0]);
 
-    const found = sentMessages.some(msg => {
+    const found = sentMessages.some((msg) => {
         if (typeof msg === 'string') {
             return msg.includes(content);
         }
@@ -90,7 +90,7 @@ export function assertCalledWith(stub, ...expectedArgs) {
     expect(stub.called).to.be.true;
 
     const calls = stub.getCalls();
-    const found = calls.some(call => {
+    const found = calls.some((call) => {
         return expectedArgs.every((arg, index) => {
             if (typeof arg === 'object' && arg !== null) {
                 return JSON.stringify(call.args[index]) === JSON.stringify(arg);
@@ -108,8 +108,8 @@ export function assertCalledWith(stub, ...expectedArgs) {
 export function assertContains(array, items) {
     expect(array).to.be.an('array');
 
-    items.forEach(item => {
-        const found = array.some(arrayItem => {
+    items.forEach((item) => {
+        const found = array.some((arrayItem) => {
             if (typeof item === 'object' && item !== null) {
                 return JSON.stringify(arrayItem) === JSON.stringify(item);
             }
@@ -139,7 +139,7 @@ export function assertIsURL(value) {
 
     try {
         new URL(value);
-    } catch (error) {
+    } catch {
         expect.fail(`Expected "${value}" to be a valid URL`);
     }
 }

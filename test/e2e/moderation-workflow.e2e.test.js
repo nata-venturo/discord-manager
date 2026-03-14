@@ -10,7 +10,12 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import prompts from 'prompts';
 import { ModerationCommand } from '../../src/commands/ModerationCommand.js';
-import { createMockDiscordClient, createMockChannel, createMockMessage, createMockMember } from '../helpers/mockDiscordClient.js';
+import {
+    createMockDiscordClient,
+    createMockChannel,
+    createMockMessage,
+    createMockMember,
+} from '../helpers/mockDiscordClient.js';
 import { mockBadWords, mockDiscordTokens } from '../helpers/fixtures.js';
 
 describe('Moderation Workflow E2E', () => {
@@ -37,15 +42,18 @@ describe('Moderation Workflow E2E', () => {
             mockClient._addMockChannel(mockChannel);
 
             // Mock user inputs
-            sandbox.stub(prompts, 'prompt')
-                .onFirstCall().resolves({ tokenId: mockDiscordTokens.valid })
-                .onSecondCall().resolves({ channelId: '123456789012345678' });
+            sandbox
+                .stub(prompts, 'prompt')
+                .onFirstCall()
+                .resolves({ tokenId: mockDiscordTokens.valid })
+                .onSecondCall()
+                .resolves({ channelId: '123456789012345678' });
 
             // Stub config repository
             sandbox.stub(moderationCommand.configRepo, 'getBadWords').resolves(mockBadWords);
 
             // Setup warning repository with tracking
-            const warnings = { 'user999': 0 };
+            const warnings = { user999: 0 };
             sandbox.stub(moderationCommand.warningRepo, 'load').resolves();
             sandbox.stub(moderationCommand.warningRepo, 'incrementWarning').callsFake((userId) => {
                 warnings[userId] = (warnings[userId] || 0) + 1;
@@ -74,44 +82,52 @@ describe('Moderation Workflow E2E', () => {
             const message1 = createMockMessage({
                 content: 'This has badword1',
                 author: { id: '999', tag: 'BadUser#1234', bot: false },
-                member: mockMember
+                member: mockMember,
             });
 
             await moderationCommand.moderateMessage(message1);
             expect(warnings['user999']).to.equal(1);
 
             // Violations 2-3 - more warnings
-            await moderationCommand.moderateMessage(createMockMessage({
-                content: 'Another badword1',
-                author: { id: '999', tag: 'BadUser#1234', bot: false },
-                member: mockMember
-            }));
+            await moderationCommand.moderateMessage(
+                createMockMessage({
+                    content: 'Another badword1',
+                    author: { id: '999', tag: 'BadUser#1234', bot: false },
+                    member: mockMember,
+                }),
+            );
             expect(warnings['user999']).to.equal(2);
 
-            await moderationCommand.moderateMessage(createMockMessage({
-                content: 'More badword1',
-                author: { id: '999', tag: 'BadUser#1234', bot: false },
-                member: mockMember
-            }));
+            await moderationCommand.moderateMessage(
+                createMockMessage({
+                    content: 'More badword1',
+                    author: { id: '999', tag: 'BadUser#1234', bot: false },
+                    member: mockMember,
+                }),
+            );
             expect(warnings['user999']).to.equal(3);
 
             // Continue to timeout threshold (7 warnings)
             for (let i = 0; i < 4; i++) {
-                await moderationCommand.moderateMessage(createMockMessage({
-                    content: 'badword1',
-                    author: { id: '999', tag: 'BadUser#1234', bot: false },
-                    member: mockMember
-                }));
+                await moderationCommand.moderateMessage(
+                    createMockMessage({
+                        content: 'badword1',
+                        author: { id: '999', tag: 'BadUser#1234', bot: false },
+                        member: mockMember,
+                    }),
+                );
             }
             expect(warnings['user999']).to.equal(7);
 
             // Continue to kick threshold (15 warnings)
             for (let i = 0; i < 8; i++) {
-                await moderationCommand.moderateMessage(createMockMessage({
-                    content: 'badword1',
-                    author: { id: '999', tag: 'BadUser#1234', bot: false },
-                    member: mockMember
-                }));
+                await moderationCommand.moderateMessage(
+                    createMockMessage({
+                        content: 'badword1',
+                        author: { id: '999', tag: 'BadUser#1234', bot: false },
+                        member: mockMember,
+                    }),
+                );
             }
             expect(warnings['user999']).to.equal(15);
 
@@ -133,7 +149,7 @@ describe('Moderation Workflow E2E', () => {
             // Message from allowed user
             const message = createMockMessage({
                 content: 'badword1 from allowed user',
-                author: { id: '123', tag: 'natarizkie', bot: false }
+                author: { id: '123', tag: 'natarizkie', bot: false },
             });
 
             await moderationCommand.handleMessage(message, mockChannel.id);
@@ -160,24 +176,30 @@ describe('Moderation Workflow E2E', () => {
             sandbox.stub(moderationCommand.moderationService, 'applyModerationAction').resolves(true);
 
             // User 1 violation
-            await moderationCommand.moderateMessage(createMockMessage({
-                content: 'badword1',
-                author: { id: '111', tag: 'User1#1234', bot: false },
-                member: createMockMember({ id: '111' })
-            }));
+            await moderationCommand.moderateMessage(
+                createMockMessage({
+                    content: 'badword1',
+                    author: { id: '111', tag: 'User1#1234', bot: false },
+                    member: createMockMember({ id: '111' }),
+                }),
+            );
 
             // User 2 violations
-            await moderationCommand.moderateMessage(createMockMessage({
-                content: 'badword1',
-                author: { id: '222', tag: 'User2#5678', bot: false },
-                member: createMockMember({ id: '222' })
-            }));
+            await moderationCommand.moderateMessage(
+                createMockMessage({
+                    content: 'badword1',
+                    author: { id: '222', tag: 'User2#5678', bot: false },
+                    member: createMockMember({ id: '222' }),
+                }),
+            );
 
-            await moderationCommand.moderateMessage(createMockMessage({
-                content: 'badword1',
-                author: { id: '222', tag: 'User2#5678', bot: false },
-                member: createMockMember({ id: '222' })
-            }));
+            await moderationCommand.moderateMessage(
+                createMockMessage({
+                    content: 'badword1',
+                    author: { id: '222', tag: 'User2#5678', bot: false },
+                    member: createMockMember({ id: '222' }),
+                }),
+            );
 
             // Verify separate tracking
             expect(warnings['111']).to.equal(1);
@@ -203,7 +225,7 @@ describe('Moderation Workflow E2E', () => {
             const message = createMockMessage({
                 content: 'badword1',
                 author: { id: '999', tag: 'User#1234', bot: false },
-                member: createMockMember({ id: '999' })
+                member: createMockMember({ id: '999' }),
             });
 
             // Should not throw
