@@ -88,7 +88,7 @@
         "helmet": "^8.0.0",
         "i18next": "^24.0.5",
         "inspirational-quotes": "^2.0.1",
-        "jsdom": "^26.0.0",
+        "jsdom": "^29.0.0",
         "langs": "^2.0.0",
         "languagedetect": "^2.0.0",
         "node-fetch": "^3.3.2",
