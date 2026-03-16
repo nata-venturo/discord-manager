@@ -81,7 +81,7 @@
         "discord-simple-api": "^1.0.6",
         "discord.js": "^14.15.3",
         "discord.js-selfbot-v13": "^3.4.5",
-        "dotenv": "^16.4.5",
+        "dotenv": "^17.3.1",
         "dotenv-flow": "^4.1.0",
         "express": "^4.19.1",
         "franc": "^6.2.0",
